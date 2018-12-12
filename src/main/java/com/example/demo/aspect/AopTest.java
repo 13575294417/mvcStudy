@@ -30,8 +30,8 @@ public class AopTest {
         System.out.println("代理的方法是 ： " + signature.getName());
         // AOP 代理的名字
         System.out.println("AOP 代理的名字 ： " + signature.getDeclaringTypeName());
-
-        signature.getDeclaringType();//  AOP代理类的类（class）信息
+        // AOP代理类的类（class）信息
+        signature.getDeclaringType();
 
         /*
            通过RequestContextHolder获取请求信息，如session 信息 ;
