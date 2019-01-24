@@ -67,13 +67,28 @@ https://blog.csdn.net/ln152315/article/details/78608438
 
 参考：自己的简书
 
-## hibernateValidate
+## HibernateValidate
 
 > spring-boot-starter-web包中自动引入了hibernate-validator包，直接用
 
 * DO中给字段添加相应注解。如：@NotNull，message填写提示信息
 * 处理器入参添加@Validate注解，对象如果为null，不会触发对象属性验证
 * 级联验证时，对象类型的属性上添加@Valid
+
+```java
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public Object handlerValidException(MethodArgumentNotValidException e) {
+    List<String> messages = new ArrayList<>();
+
+    BindingResult result = e.getBindingResult();
+    List<ObjectError> allErrors = result.getAllErrors();
+    for (Iterator<ObjectError> iterator = allErrors.iterator(); iterator.hasNext(); ) {
+        ObjectError error = iterator.next();
+        messages.add(error.getDefaultMessage());
+    }
+    return messages;
+}
+```
 
 参考：http://www.cnblogs.com/mr-yang-localhost/p/7812038.html
 
