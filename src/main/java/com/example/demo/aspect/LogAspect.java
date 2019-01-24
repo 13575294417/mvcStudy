@@ -23,12 +23,15 @@ public class LogAspect {
 
     @Before("logPointcut()")
     public void logBeforeAdvice(JoinPoint joinPoint) {
+        // 获取目标方法的参数信息
         Object[] args = joinPoint.getArgs();
         System.out.println("getArgs:"+ Arrays.toString(args));
 
+        // 代理对象
         Object pointThis = joinPoint.getThis();
         System.out.println("getThis:"+pointThis);
 
+        // 目标对象
         Object target = joinPoint.getTarget();
         System.out.println("getTarget:"+target);
 
@@ -44,6 +47,36 @@ public class LogAspect {
 
         Class returnType = signature.getReturnType();
         System.out.println("getReturnType:"+returnType);
+
+
+        /*
+        // 签名方法
+        Signature signature = joinPoint.getSignature();
+        // 被代理方法名称
+        System.out.println("代理的方法是 ： " + signature.getName());
+        // 被代理类名称
+        System.out.println("AOP 代理的名字 ： " + signature.getDeclaringTypeName());
+        // 被代理类
+        signature.getDeclaringType();
+
+        // 通过RequestContextHolder获取请求信息，如session 信息 ;
+        // 获取RequestAttributes
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        // 从requestAttributes中获取HttpServletRequest信息
+        HttpServletRequest request = (HttpServletRequest) requestAttributes.resolveReference(RequestAttributes.REFERENCE_REQUEST);
+        // 获取session信息
+        HttpSession session = (HttpSession) requestAttributes.resolveReference(RequestAttributes.REFERENCE_SESSION);
+        System.out.println("请求 ： " + request + " ,  HttpSession : " + session);
+        Enumeration<String> enumerations = request.getParameterNames();
+        Map<String, String> parameterMaps = Maps.newHashMap();
+        while (enumerations.hasMoreElements()) {
+            String parameter = enumerations.nextElement();
+            parameterMaps.put(parameter, request.getParameter(parameter));
+        }
+        String str = JSON.toJSONString(parameterMaps);//   alibaba.fastjson
+        if (obj.length > 0) {
+            System.out.println("请求参数信息为 ： " + str);
+        }*/
     }
 
     @Pointcut("@annotation(com.example.demo.annotation.BatchProcessAnnotation)")

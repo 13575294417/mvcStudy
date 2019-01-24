@@ -16,8 +16,8 @@ spring-boot下对mvc部分功能进行总结，供以后复习
 * 通知方法入参：(JoinPoint joinPoint)
 
 ```java
-@Before("pointCutExecution()")
-public void doBeforeAdvice(JoinPoint joinPoint) {
+@Before("logPointcut()")
+public void logBeforeAdvice(JoinPoint joinPoint) {
     // 获取目标方法的参数信息
     Object[] args = joinPoint.getArgs();
     // AOP代理类信息
@@ -48,7 +48,7 @@ public void doBeforeAdvice(JoinPoint joinPoint) {
 * 通过 JoinPoint拿到 MethodSignature，再拿方法对象和方法上的注解
 
 ```java
-@Pointcut(value = "execution(* *..*.*(..)) && @annotation(com.example.demo.annotation.TestAnnotation)")
+@Pointcut("@annotation(com.example.demo.annotation.BatchProcessAnnotation)")
 public void annotationPointcutTest() {
 }
 ```
