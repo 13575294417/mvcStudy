@@ -5,6 +5,9 @@ spring-boot下对mvc部分功能进行总结，供以后复习
 
 > 自动开启代理注解，不需要额外设置 @EnableAspectJAutoProxy.
 > 引入spring-boot-starter-aop包即可
+> 
+> springboot 2.0 在 autoconfigure 包下的 spring-configuration-metadata.json 文件中，
+> 默认设置proxy-target-class为true，所以默认使用CGLIB代理
 
 * 类上 @Aspect @Component 两注解声明
 * @Pointcut 中的 execution 表达式
@@ -37,6 +40,8 @@ public void doBeforeAdvice(JoinPoint joinPoint) {
 ## 自定义注解结合AspectJ
 
 > spring-boot-starter-aop包中引用了spring-aop 和 aspectjweaver
+> 
+> 需要注意获取注解属性时，getMethod 方法要连写，否则是从代理对象上获取，代理对象上没有注解，报空指针异常
 
 * 创建注解类 @interface
 * 切入点表达式后 && 拼接 @annotation，@annotation中是过滤的注解的全限定名
