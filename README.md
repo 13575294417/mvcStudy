@@ -41,7 +41,7 @@ public void logBeforeAdvice(JoinPoint joinPoint) {
 
 > spring-boot-starter-aop包中引用了spring-aop 和 aspectjweaver
 > 
-> 需要注意获取注解属性时，getMethod 方法要连写，否则是从代理对象上获取，代理对象上没有注解，报空指针异常
+> 需要注意获取注解属性时，要从目标类上获取，利用原生反射。否则是从代理对象上获取，代理对象上没有注解，报空指针异常
 
 * 创建注解类 @interface
 * 切入点表达式后 && 拼接 @annotation，@annotation中是过滤的注解的全限定名
